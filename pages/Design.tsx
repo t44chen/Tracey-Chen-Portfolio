@@ -12,9 +12,9 @@ const Design: React.FC = () => {
   const comicImages = ['Design/comic-1.jpg', 'Design/comic-2.jpg', 'Design/comic-3.jpg', 'Design/comic-4.jpg', 'Design/comic-5.jpg'];
   
   const brandConcepts = [
-    { 'Design/design-1.jpg' },
-    { 'Design/design-2.jpg' },
-    { 'Design/design-3.jpg' }
+    { img: 'Design/design-1.jpg' },
+    { img: 'Design/design-2.jpg' },
+    { img: 'Design/design-3.jpg' }
   ];
 
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
@@ -114,7 +114,7 @@ const Design: React.FC = () => {
             <ImageComparison before="/Tracey-Chen-Portfolio/Design/1-before.jpg" after="/Tracey-Chen-Portfolio/Design/1-after.jpg" />
           </div>
           <div className="space-y-4">
-            <ImageComparison before="/Tracey-Chen-Portfolio/Design/2-before.jpg" after="/Tracey-Chen-Portfolio/Design/2-after.jpg" />
+            <ImageComparison before="/Tracey-Chen-Portfolio/Design/2-before.jpg" after="/Tracey-Chen-Portfolio/Design/2-after.JPG" />
           </div>
         </div>
       </section>
