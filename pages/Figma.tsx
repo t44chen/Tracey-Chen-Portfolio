@@ -1,48 +1,48 @@
-
 import React, { useState } from 'react';
 
 const Figma: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  // FIXED PATHS IN ARRAY BELOW
   const projects = [
     { 
       id: 1, 
-      img: 'images/Figma/PJ1.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ1.jpg', 
       title: 'Toronto Fertility Care - Website Redesign', 
       desc: 'Redesigned the official website for a fertility clinic to improve user navigation and modern medical branding.',
       tags: ['Web Redesign', 'Academic Project']
     },
     { 
       id: 2, 
-      img: 'images/Figma/PJ2.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ2.jpg', 
       title: 'MedSync - Walk-in Clinic Management App', 
       desc: 'A multi-functional healthcare app collaborating with engineering students, featuring waitlists, medication tracking, and clinic navigation.',
       tags: ['Collaboration', 'Mobile UI', 'Healthcare']
     },
     { 
       id: 3, 
-      img: 'images/Figma/PJ3.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ3.jpg', 
       title: 'Mediflect - Medication Tracker & Education', 
       desc: 'A group-designed application focused on medication schedules and providing detailed pharmaceutical information for patients.',
       tags: ['Group Project', 'HealthTech', 'UX Research']
     },
     { 
       id: 4, 
-      img: 'images/Figma/PJ4.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ4.jpg', 
       title: 'Little Lemon - Restaurant Ordering & Reservation', 
       desc: 'An end-to-end mobile interface design for a dining experience, including table booking, menu browsing, and seamless ordering.',
       tags: ['E-commerce', 'Mobile UI', 'Case Study']
     },
     { 
       id: 5, 
-      img: 'images/Figma/PJ5.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ5.jpg', 
       title: 'VeniceGo - Multi-modal Transit App', 
       desc: 'A transportation app tailored for Venice, integrating waterbus (Vaporetto), taxi services, and urban navigation.',
       tags: ['Transportation', 'Travel UI', 'Location Services']
     },
     { 
       id: 6, 
-      img: 'images/Figma/PJ6.jpg', 
+      img: '/Tracey-Chen-Portfolio/Figma/PJ6.jpg', 
       title: 'Zoo - Gamified Fitness Motivation App', 
       desc: 'A collaborative project designing a gamified fitness app to encourage beginners to start their workout journey through social engagement.',
       tags: ['Group Project', 'Gamification', 'Fitness UI']
