@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageComparison from '../components/ImageComparison';
 
 const Design: React.FC = () => {
   const identityImages = [
@@ -34,6 +35,7 @@ const Design: React.FC = () => {
         </p>
       </header>
 
+      {/* Section 1: Identity & Commercial Branding */}
       <section>
         <SectionHeader 
           title="Identity & Commercial Branding" 
@@ -42,12 +44,14 @@ const Design: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => (
             <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-              <img src={img} alt="Branding Asset" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              {/* FIXED PATH BELOW */}
+              <img src={`/Tracey-Chen-Portfolio/${img}`} alt="Branding Asset" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
             </div>
           ))}
         </div>
       </section>
 
+      {/* Section 2: Illustration & Visual Storytelling */}
       <section>
         <SectionHeader 
           title="Illustration & Visual Storytelling" 
@@ -58,7 +62,8 @@ const Design: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {illustrationImages.map((img, i) => (
               <div key={i} className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
-                <img src={img} alt="Illustration" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                {/* FIXED PATH BELOW */}
+                <img src={`/Tracey-Chen-Portfolio/${img}`} alt="Illustration" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
             ))}
           </div>
@@ -66,7 +71,8 @@ const Design: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {comicImages.map((img, i) => (
               <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
-                <img src={img} alt="Comic Page" className="w-full h-full object-cover group-hover:brightness-110 transition-all" />
+                {/* FIXED PATH BELOW */}
+                <img src={`/Tracey-Chen-Portfolio/${img}`} alt="Comic Page" className="w-full h-full object-cover group-hover:brightness-110 transition-all" />
                 <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/40 to-transparent">
                   <span className="text-[10px] text-white font-bold tracking-widest uppercase">Page {i + 1}</span>
                 </div>
@@ -86,7 +92,8 @@ const Design: React.FC = () => {
           {brandConcepts.map((concept, i) => (
             <div key={i} className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center">
               <div className="group relative rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 apple-transition aspect-[16/10]">
-                <img src={concept.img} alt="Brand Concept" className="w-full h-full object-cover" />
+                {/* FIXED PATH BELOW */}
+                <img src={`/Tracey-Chen-Portfolio/${concept.img}`} alt="Brand Concept" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
               </div>
             </div>
@@ -94,23 +101,25 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 4: Post-Production & Retouching (移除报错的组件) */}
+      {/* Section 4: Post-Production & Retouching */}
       <section>
         <SectionHeader 
           title="Post-Production & Retouching" 
           desc="Expertise in high-end retouching and color grading, focused on enhancing visual aesthetics through meticulous post-production." 
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="rounded-[2.5rem] overflow-hidden shadow-lg">
-            <img src="Design/1-after.jpg" alt="After" className="w-full h-auto" />
+          <div className="space-y-4">
+            {/* 注意：这里使用了 ImageComparison 组件，如果该组件内部也是直接使用 src，你可能需要进入该组件修改，或者在这里传入完整路径。
+                假设 ImageComparison 接受完整路径，这里应该改为： */}
+            <ImageComparison before="/Tracey-Chen-Portfolio/Design/1-before.jpg" after="/Tracey-Chen-Portfolio/Design/1-after.jpg" />
           </div>
-          <div className="rounded-[2.5rem] overflow-hidden shadow-lg">
-            <img src="Design/2-after.jpg" alt="After" className="w-full h-auto" />
+          <div className="space-y-4">
+            <ImageComparison before="/Tracey-Chen-Portfolio/Design/2-before.jpg" after="/Tracey-Chen-Portfolio/Design/2-after.jpg" />
           </div>
         </div>
       </section>
 
-      {/* Section 5: Motion Media (保留原始设计) */}
+      {/* Section 5: Motion Media */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
@@ -123,9 +132,9 @@ const Design: React.FC = () => {
                 <video 
                   className="w-full h-full object-cover"
                   controls
-                  poster="Design/video-poster-1.jpg"
+                  poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
                 >
-                  <source src="Design/Video-1.mp4" type="video/mp4" />
+                  <source src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -134,9 +143,9 @@ const Design: React.FC = () => {
                 <video 
                   className="w-full h-full object-cover"
                   controls
-                  poster="Design/video-poster-2.jpg"
+                  poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
                 >
-                  <source src="Design/reel-1.mp4" type="video/mp4" />
+                  <source src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
