@@ -4,18 +4,18 @@ import ImageComparison from '../components/ImageComparison';
 
 const Design: React.FC = () => {
   const identityImages = [
-    'Design/logo-1.jpg', 'Design/logo-2.jpg', 'Design/logo-3.jpg', 
-    'Design/Banner-1.jpg', 'Design/Banner-2.jpg', 
-    'Design/business-card-1.jpg', 'Design/business-card-2.jpg'
+    '/Design/logo-1.jpg', '/Design/logo-2.jpg', '/Design/logo-3.jpg', 
+    '/Design/Banner-1.jpg', '/Design/Banner-2.jpg', 
+    '/Design/business-card-1.jpg', '/Design/business-card-2.jpg'
   ];
   
-  const illustrationImages = ['Design/1.jpg','Design/9.jpg','Design/2.jpg', 'Design/4.jpg', 'Design/7.jpg', 'Design/3.jpg', 'Design/13.jpg', 'Design/12.jpg'];
-  const comicImages = ['Design/comic-1.jpg', 'Design/comic-2.jpg', 'Design/comic-3.jpg', 'Design/comic-4.jpg', 'Design/comic-5.jpg'];
+  const illustrationImages = ['/Design/1.jpg','/Design/9.jpg','/Design/2.jpg', '/Design/4.jpg', '/Design/7.jpg', '/Design/3.jpg', '/Design/13.jpg', '/Design/12.jpg'];
+  const comicImages = ['/Design/comic-1.jpg', '/Design/comic-2.jpg', '/Design/comic-3.jpg', '/Design/comic-4.jpg', '/Design/comic-5.jpg'];
   
   const brandConcepts = [
-    { img: 'Design/design-1.jpg' },
-    { img: 'Design/design-2.jpg' },
-    { img: 'Design/design-3.jpg' }
+    { img: '/Design/design-1.jpg' },
+    { img: '/Design/design-2.jpg' },
+    { img: '/Design/design-3.jpg' }
   ];
 
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
@@ -106,10 +106,10 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-4">
-            <ImageComparison before="Design/1-before.jpg" after="Design/1-after.jpg" />
+            <ImageComparison before="/Design/1-before.jpg" after="/Design/1-after.jpg" />
           </div>
           <div className="space-y-4">
-            <ImageComparison before="Design/2-before.jpg" after="Design/2-after.jpg" />
+            <ImageComparison before="/Design/2-before.jpg" after="/Design/2-after.jpg" />
           </div>
         </div>
       </section>
@@ -127,9 +127,9 @@ const Design: React.FC = () => {
                 <video 
                   className="w-full h-full object-cover"
                   controls
-                  poster="Design/video-poster-1.jpg"
+                  poster="/Design/video-poster-1.jpg"
                 >
-                  <source src="Design/Video-1.mp4" type="video/mp4" />
+                  <source src="/Design/Video-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -138,9 +138,9 @@ const Design: React.FC = () => {
                 <video 
                   className="w-full h-full object-cover"
                   controls
-                  poster="Design/video-poster-2.jpg"
+                  poster="/Design/video-poster-2.jpg"
                 >
-                  <source src="Design/reel-1.mp4" type="video/mp4" />
+                  <source src="/Design/reel-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
