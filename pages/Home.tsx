@@ -39,12 +39,12 @@ const FadeIn: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Home: React.FC = () => {
   const software = [
-    { name: 'Photoshop', icon: 'Logo/PS.jpg' },
-    { name: 'Illustrator', icon: 'Logo/AI.jpg' },
-    { name: 'Premiere Pro', icon: 'Logo/PR.jpg' },
-    { name: 'Figma', icon: 'Logo/Figma.jpg' },
-    { name: 'Procreate', icon: 'Logo/Procreate.jpg' },
-    { name: 'Final Cut Pro', icon: 'Logo/FCP.jpg' },
+    { name: 'Photoshop', icon: './Logo/PS.jpg' },
+    { name: 'Illustrator', icon: './Logo/AI.jpg' },
+    { name: 'Premiere Pro', icon: './Logo/PR.jpg' },
+    { name: 'Figma', icon: './Logo/Figma.jpg' },
+    { name: 'Procreate', icon: './Logo/Procreate.jpg' },
+    { name: 'Final Cut Pro', icon: './Logo/FCP.jpg' },
   ];
 
   return (
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
             <FadeIn>
               <div className="relative group">
                 <div className="w-72 h-72 md:w-96 md:h-96 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white apple-transition group-hover:scale-[1.02] group-hover:shadow-3xl transition-all duration-700">
-                  <img src="Home/portrait.jpg" alt="Tracey Chen Portrait" className="w-full h-full object-cover" />
+                  <img src="./Home/portrait.jpg" alt="Tracey Chen Portrait" className="w-full h-full object-cover" />
                 </div>
                 {/* Abstract shape decoration */}
                 <div className="absolute -z-10 -bottom-6 -right-6 w-32 h-32 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
@@ -114,7 +114,7 @@ const Home: React.FC = () => {
           <div className="md:col-span-8">
             <FadeIn>
               <Link to="/figma" className="group block relative rounded-[2.5rem] overflow-hidden aspect-video shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="./Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-12 text-white">
                   <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">UX & UI Design</span>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Figma Project</h2>
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
           <div className="md:col-span-4">
             <FadeIn>
               <Link to="/photography" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="Home/photo.jpg" alt="Photography" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="./Home/photo.jpg" alt="Photography" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-10 text-white">
                   <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Visual Storytelling</span>
                   <h2 className="text-3xl font-bold tracking-tight">Photography</h2>
@@ -143,7 +143,7 @@ const Home: React.FC = () => {
           <div className="md:col-span-12">
             <FadeIn>
               <Link to="/design" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[21/9] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="./Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
                   <div className="max-w-2xl">
                     <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Branding & Motion</span>
