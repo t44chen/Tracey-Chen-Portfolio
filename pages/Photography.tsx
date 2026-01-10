@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const Photography: React.FC = () => {
@@ -23,8 +22,9 @@ const Photography: React.FC = () => {
         {images.map((img, i) => (
           <div key={i} className="masonry-item apple-transition group relative">
             <div className="rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-100">
+              {/* FIXED PATH BELOW */}
               <img 
-                src={`images/Photography/${img}`} 
+                src={`/Tracey-Chen-Portfolio/Photography/${img}`} 
                 alt={`Photo ${i}`} 
                 className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-700" 
                 loading="lazy"
