@@ -4,19 +4,23 @@ import ImageComparison from '../components/ImageComparison';
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', // 特殊处理：缩小一点 (p-3)
-    'Design/logo-3.jpg', // 恢复原状
+    'Design/logo-2.jpg', 
+    'Design/logo-3.jpg', 
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
     'Design/businesscard-1.jpg', 
     'Design/businesscard-2.jpg'
   ];
   
-  const illustrationImages = [
+  // 根据要求将插画分为横图和竖图两组
+  const horizontalIllustrations = [
     'Design/1.jpg', 
     'Design/9.jpg', 
+    'Design/8.jpg'
+  ];
+
+  const verticalIllustrations = [
     'Design/2.jpg', 
-    'Design/8.jpg', // 新加的图片
     'Design/4.jpg', 
     'Design/7.jpg', 
     'Design/3.jpg', 
@@ -45,7 +49,7 @@ const Design: React.FC = () => {
   // 视频卡片组件，方便复用样式
   const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
     <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-      <div className={`rounded-[2rem] overflow-hidden bg-black relative h-full flex items-center justify-center`}>
+      <div className={`rounded-[2rem] overflow-hidden bg-black/5 relative h-full flex items-center justify-center`}>
         <video 
           className={`w-full ${vertical ? 'h-full object-cover' : 'h-auto block'}`}
           controls
@@ -76,7 +80,7 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => {
-            // 修改逻辑：只针对 logo-2 进行缩小处理
+            // 只针对 logo-2 进行缩小处理
             const isLogo2 = img.includes('logo-2');
             
             return (
@@ -84,7 +88,7 @@ const Design: React.FC = () => {
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Branding Asset" 
-                  // logo-2 使用 p-3 (适度缩小)，其他 logo (包括logo-3) 恢复 object-cover
+                  // logo-2 使用 p-3 (适度缩小)，其他 logo 恢复 object-cover
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
                     ${isLogo2 ? 'object-contain p-3' : 'object-cover'}`} 
                 />
@@ -94,7 +98,7 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2: Illustration & Visual Storytelling (增加了灰色背景) */}
+      {/* Section 2: Illustration & Visual Storytelling (有灰色背景) */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
@@ -102,17 +106,33 @@ const Design: React.FC = () => {
             desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
           />
           <div className="space-y-12">
-            {/* Illustrations */}
-            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-              {illustrationImages.map((img, i) => (
-                <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
-                  <img 
-                    src={`/Tracey-Chen-Portfolio/${img}`} 
-                    alt="Illustration" 
-                    className="w-full h-auto block group-hover:scale-105 transition-transform duration-700" 
-                  />
-                </div>
-              ))}
+            {/* Illustrations - 新的布局：左侧3张横图，右侧6张竖图 */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* 左侧：3张横图/正方形 */}
+              <div className="lg:col-span-1 flex flex-col gap-6">
+                {horizontalIllustrations.map((img, i) => (
+                  <div key={i} className="rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition aspect-[4/3]">
+                    <img 
+                      src={`/Tracey-Chen-Portfolio/${img}`} 
+                      alt="Illustration" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {/* 右侧：6张竖图，2x3排列 */}
+              <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {verticalIllustrations.map((img, i) => (
+                  <div key={i} className="rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition aspect-[2/3]">
+                    <img 
+                      src={`/Tracey-Chen-Portfolio/${img}`} 
+                      alt="Illustration" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             
             {/* Comics */}
@@ -182,7 +202,7 @@ const Design: React.FC = () => {
           {/* 使用12列网格来实现：横-竖-竖 的布局 */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             
-            {/* Video 1 (Horizontal): 占 6/12 列 (50%) */}
+            {/* Video 1 (Horizontal): 占 6/12 列 (50%) - 现在会显示封面和正常比例 */}
             <div className="md:col-span-6 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" 
@@ -195,11 +215,11 @@ const Design: React.FC = () => {
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
                 vertical={true}
-                // 如果你有海报图，可以在这里加 poster
+                // 如果有 Video-2 的封面，请在这里添加 poster="/path/to/poster.jpg"
               />
             </div>
 
-            {/* Reel 1 (Vertical): 占 3/12 列 (25%) */}
+            {/* Reel 1 (Vertical): 占 3/12 列 (25%) - 现在会显示封面和正常比例 */}
             <div className="md:col-span-3 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" 
