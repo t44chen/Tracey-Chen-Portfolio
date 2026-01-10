@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,12 +39,12 @@ const FadeIn: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Home: React.FC = () => {
   const software = [
-    { name: 'Photoshop', icon: './Logo/PS.jpg' },
-    { name: 'Illustrator', icon: './Logo/AI.jpg' },
-    { name: 'Premiere Pro', icon: './Logo/PR.jpg' },
-    { name: 'Figma', icon: './Logo/Figma.jpg' },
-    { name: 'Procreate', icon: './Logo/Procreate.jpg' },
-    { name: 'Final Cut Pro', icon: './Logo/FCP.jpg' },
+    { name: 'Photoshop', icon: 'Logo/PS.jpg' },
+    { name: 'Illustrator', icon: 'Logo/AI.jpg' },
+    { name: 'Premiere Pro', icon: 'Logo/PR.jpg' },
+    { name: 'Figma', icon: 'Logo/Figma.jpg' },
+    { name: 'Procreate', icon: 'Logo/Procreate.jpg' },
+    { name: 'Final Cut Pro', icon: 'Logo/FCP.jpg' },
   ];
 
   return (
@@ -64,17 +65,13 @@ const Home: React.FC = () => {
               </p>
             </FadeIn>
             <FadeIn>
-              <div className="pt-4 flex flex-wrap items-center gap-8">
+              <div className="pt-4">
                 <a 
                   href="mailto:t44chen@uwaterloo.ca"
                   className="inline-block px-8 py-4 bg-[#1d1d1f] text-white rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all hover:shadow-xl active:scale-95 shadow-lg"
                 >
                   Work with me
                 </a>
-                <div className="flex gap-6 text-lg font-medium">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition-colors">LinkedIn</a>
-                  <a href="mailto:t44chen@uwaterloo.ca" className="text-blue-600 hover:text-blue-800 transition-colors">t44chen@uwaterloo.ca</a>
-                </div>
               </div>
             </FadeIn>
           </div>
@@ -82,8 +79,9 @@ const Home: React.FC = () => {
             <FadeIn>
               <div className="relative group">
                 <div className="w-72 h-72 md:w-96 md:h-96 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white apple-transition group-hover:scale-[1.02] group-hover:shadow-3xl transition-all duration-700">
-                  <img src="./Home/portrait.jpg" alt="Tracey Chen Portrait" className="w-full h-full object-cover" />
+                  <img src="Home/portrait.jpg" alt="Tracey Chen Portrait" className="w-full h-full object-cover" />
                 </div>
+                {/* Abstract shape decoration */}
                 <div className="absolute -z-10 -bottom-6 -right-6 w-32 h-32 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
                 <div className="absolute -z-10 -top-6 -left-6 w-32 h-32 bg-purple-50 rounded-full blur-3xl opacity-60"></div>
               </div>
@@ -112,10 +110,11 @@ const Home: React.FC = () => {
       {/* Bento Grid */}
       <section className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Figma Card */}
           <div className="md:col-span-8">
             <FadeIn>
               <Link to="/figma" className="group block relative rounded-[2.5rem] overflow-hidden aspect-video shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="./Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-12 text-white">
                   <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">UX & UI Design</span>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Figma Project</h2>
@@ -125,10 +124,11 @@ const Home: React.FC = () => {
             </FadeIn>
           </div>
 
+          {/* Photography Card */}
           <div className="md:col-span-4">
             <FadeIn>
               <Link to="/photography" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[4/5] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="./Home/photo.jpg" alt="Photography" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="Home/photo.jpg" alt="Photography" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-10 text-white">
                   <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Visual Storytelling</span>
                   <h2 className="text-3xl font-bold tracking-tight">Photography</h2>
@@ -139,10 +139,11 @@ const Home: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Visual Design Card */}
           <div className="md:col-span-12">
             <FadeIn>
               <Link to="/design" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[21/9] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="./Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <img src="Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
                   <div className="max-w-2xl">
                     <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Branding & Motion</span>
@@ -154,16 +155,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Footer Branding section */}
-      <footer className="pt-24 pb-12 text-center space-y-8">
-        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-[#1d1d1f]">Let’s work together</h2>
-        <div className="flex justify-center gap-12 text-xl font-medium">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 transition-colors">LinkedIn</a>
-          <a href="mailto:t44chen@uwaterloo.ca" className="text-blue-600 hover:text-blue-800 transition-colors">t44chen@uwaterloo.ca</a>
-        </div>
-        <p className="text-gray-400 text-sm pt-12">© 2026 Tracey Chen. Built with passion & precision.</p>
-      </footer>
     </div>
   );
 };
