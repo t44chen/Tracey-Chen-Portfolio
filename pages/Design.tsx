@@ -4,8 +4,8 @@ import ImageComparison from '../components/ImageComparison';
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', 
-    'Design/logo-3.jpg', // 现在这个会被应用特殊样式
+    'Design/logo-2.jpg', // 特殊处理：缩小一点 (p-3)
+    'Design/logo-3.jpg', // 恢复原状
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
     'Design/businesscard-1.jpg', 
@@ -13,8 +13,15 @@ const Design: React.FC = () => {
   ];
   
   const illustrationImages = [
-    'Design/1.jpg', 'Design/9.jpg', 'Design/2.jpg', 'Design/4.jpg', 
-    'Design/7.jpg', 'Design/3.jpg', 'Design/13.jpg', 'Design/12.jpg'
+    'Design/1.jpg', 
+    'Design/9.jpg', 
+    'Design/2.jpg', 
+    'Design/8.jpg', // 新加的图片
+    'Design/4.jpg', 
+    'Design/7.jpg', 
+    'Design/3.jpg', 
+    'Design/13.jpg', 
+    'Design/12.jpg'
   ];
   
   const comicImages = [
@@ -32,6 +39,21 @@ const Design: React.FC = () => {
     <div className="mb-12">
       <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-3">{title}</h2>
       <p className="text-lg text-gray-500 max-w-2xl font-light">{desc}</p>
+    </div>
+  );
+
+  // 视频卡片组件，方便复用样式
+  const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
+    <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
+      <div className={`rounded-[2rem] overflow-hidden bg-black relative h-full flex items-center justify-center`}>
+        <video 
+          className={`w-full ${vertical ? 'h-full object-cover' : 'h-auto block'}`}
+          controls
+          poster={poster}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      </div>
     </div>
   );
 
@@ -54,17 +76,17 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => {
-            // 修改点：现在检测文件名是否包含 logo-3
-            const isTargetLogo = img.includes('logo-3');
+            // 修改逻辑：只针对 logo-2 进行缩小处理
+            const isLogo2 = img.includes('logo-2');
             
             return (
               <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-white">
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Branding Asset" 
-                  // isTargetLogo 为真时，使用 object-contain 且加一点内边距(p-6)让它显示完整且不贴边
+                  // logo-2 使用 p-3 (适度缩小)，其他 logo (包括logo-3) 恢复 object-cover
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
-                    ${isTargetLogo ? 'object-contain p-6' : 'object-cover'}`} 
+                    ${isLogo2 ? 'object-contain p-3' : 'object-cover'}`} 
                 />
               </div>
             );
@@ -72,40 +94,42 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2: Illustration & Visual Storytelling */}
-      <section>
-        <SectionHeader 
-          title="Illustration & Visual Storytelling" 
-          desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
-        />
-        <div className="space-y-12">
-          {/* Illustrations - 瀑布流布局 */}
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-            {illustrationImages.map((img, i) => (
-              <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
-                <img 
-                  src={`/Tracey-Chen-Portfolio/${img}`} 
-                  alt="Illustration" 
-                  className="w-full h-auto block group-hover:scale-105 transition-transform duration-700" 
-                />
-              </div>
-            ))}
-          </div>
-          
-          {/* Comics - 保持水平一行显示 */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {comicImages.map((img, i) => (
-              <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
-                <img 
-                  src={`/Tracey-Chen-Portfolio/${img}`} 
-                  alt="Comic Page" 
-                  className="w-full h-auto block group-hover:brightness-110 transition-all" 
-                />
-                <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/40 to-transparent">
-                  <span className="text-[10px] text-white font-bold tracking-widest uppercase">Page {i + 1}</span>
+      {/* Section 2: Illustration & Visual Storytelling (增加了灰色背景) */}
+      <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader 
+            title="Illustration & Visual Storytelling" 
+            desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
+          />
+          <div className="space-y-12">
+            {/* Illustrations */}
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+              {illustrationImages.map((img, i) => (
+                <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
+                  <img 
+                    src={`/Tracey-Chen-Portfolio/${img}`} 
+                    alt="Illustration" 
+                    className="w-full h-auto block group-hover:scale-105 transition-transform duration-700" 
+                  />
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            {/* Comics */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              {comicImages.map((img, i) => (
+                <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
+                  <img 
+                    src={`/Tracey-Chen-Portfolio/${img}`} 
+                    alt="Comic Page" 
+                    className="w-full h-auto block group-hover:brightness-110 transition-all" 
+                  />
+                  <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/40 to-transparent">
+                    <span className="text-[10px] text-white font-bold tracking-widest uppercase">Page {i + 1}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -116,7 +140,6 @@ const Design: React.FC = () => {
           title="Brand Identity Concepts" 
           desc="A strategic redesign modernizing The Body Shop’s identity through a cohesive visual system and high-fidelity digital packaging mockups." 
         />
-        {/* 横向滚动区域 */}
         <div className="flex overflow-x-auto pb-8 -mx-6 px-6 space-x-8 snap-x">
           {brandConcepts.map((concept, i) => (
             <div key={i} className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center">
@@ -149,45 +172,42 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 5: Motion Media - 美化版 */}
+      {/* Section 5: Motion Media */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
             title="Motion Media & Video Production" 
             desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            {/* Video 1 */}
-            <div className="group">
-              {/* 外层增加白色卡片背景和内边距，形成'画框'效果 */}
-              <div className="bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-                <div className="rounded-[2rem] overflow-hidden bg-black relative">
-                   <video 
-                    className="w-full h-auto block" 
-                    controls
-                    poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
-                  >
-                    <source src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
+          {/* 使用12列网格来实现：横-竖-竖 的布局 */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            
+            {/* Video 1 (Horizontal): 占 6/12 列 (50%) */}
+            <div className="md:col-span-6 w-full">
+              <VideoCard 
+                src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" 
+                poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
+              />
             </div>
 
-            {/* Video 2 */}
-            <div className="group">
-              {/* 同样的卡片样式 */}
-              <div className="bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-                <div className="rounded-[2rem] overflow-hidden bg-black relative">
-                  <video 
-                    className="w-full h-auto block" 
-                    controls
-                    poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
-                  >
-                    <source src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" type="video/mp4" />
-                  </video>
-                </div>
-              </div>
+            {/* Video 2 (Vertical): 占 3/12 列 (25%) */}
+            <div className="md:col-span-3 w-full">
+              <VideoCard 
+                src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
+                vertical={true}
+                // 如果你有海报图，可以在这里加 poster
+              />
             </div>
+
+            {/* Reel 1 (Vertical): 占 3/12 列 (25%) */}
+            <div className="md:col-span-3 w-full">
+              <VideoCard 
+                src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" 
+                poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
+                vertical={true}
+              />
+            </div>
+
           </div>
         </div>
       </section>
