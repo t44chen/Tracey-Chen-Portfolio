@@ -4,7 +4,7 @@ import ImageComparison from '../components/ImageComparison';
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', // 将会被特殊处理缩小
+    'Design/logo-2.jpg', // 会被特殊处理，缩小一点点但不会太小
     'Design/logo-3.jpg', 
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
@@ -54,7 +54,6 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => {
-            // Check if this is logo-2 to apply specific styling
             const isTargetLogo = img.includes('logo-2');
             
             return (
@@ -62,10 +61,9 @@ const Design: React.FC = () => {
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Branding Asset" 
-                  // 如果是 logo-2，添加 'p-12' (内边距) 让它看起来更小，且保持 object-contain
-                  // 其他图片保持 object-cover 填满格子
+                  // 修改点1: 从 p-12 改为 p-5。这会减少留白，让 Logo 变大。
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
-                    ${isTargetLogo ? 'object-contain p-12' : 'object-cover'}`} 
+                    ${isTargetLogo ? 'object-contain p-5' : 'object-cover'}`} 
                 />
               </div>
             );
@@ -80,11 +78,10 @@ const Design: React.FC = () => {
           desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
         />
         <div className="space-y-12">
-          {/* Illustrations - 使用 columns 布局来实现瀑布流（原尺寸显示） */}
+          {/* Illustrations - 保持瀑布流 */}
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {illustrationImages.map((img, i) => (
               <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
-                {/* 移除了 fixed height 和 aspect ratio，使用 w-full h-auto */}
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Illustration" 
@@ -94,10 +91,10 @@ const Design: React.FC = () => {
             ))}
           </div>
           
-          {/* Comics - 同样使用 columns 布局以适应不同长度的漫画 */}
-          <div className="columns-2 md:columns-4 gap-4 space-y-4">
+          {/* Comics - 修改点2: 使用 grid-cols-5 确保5张图在一条水平线上 */}
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {comicImages.map((img, i) => (
-              <div key={i} className="break-inside-avoid group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
+              <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Comic Page" 
@@ -118,16 +115,10 @@ const Design: React.FC = () => {
           title="Brand Identity Concepts" 
           desc="A strategic redesign modernizing The Body Shop’s identity through a cohesive visual system and high-fidelity digital packaging mockups." 
         />
-        {/* 关于路径问题：
-           代码逻辑 `/Tracey-Chen-Portfolio/${concept.img}` 会生成 `/Tracey-Chen-Portfolio/Design/design-1.jpg`。
-           如果图片不显示，请检查：
-           1. public/Design 文件夹下是否有 design-1.jpg
-           2. 大小写是否完全匹配（Design vs design，jpg vs JPG）
-        */}
-        <div className="flex overflow-x-auto pb-8 -mx-6 px-6 space-x-8 scrollbar-hide snap-x">
+        {/* 修改点3: 移除了 'scrollbar-hide'，现在滚动条会显示出来 */}
+        <div className="flex overflow-x-auto pb-8 -mx-6 px-6 space-x-8 snap-x">
           {brandConcepts.map((concept, i) => (
             <div key={i} className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center">
-              {/* 移除了 aspect-[16/10] 强制比例，改为 h-auto，允许图片展示原尺寸 */}
               <div className="group relative rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 apple-transition">
                 <img 
                   src={`/Tracey-Chen-Portfolio/${concept.img}`} 
@@ -166,7 +157,6 @@ const Design: React.FC = () => {
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="group space-y-6">
-              {/* 移除了 aspect-video 和 h-full，现在视频将按实际尺寸显示 */}
               <div className="rounded-[2.5rem] overflow-hidden shadow-lg bg-black group-hover:shadow-2xl transition-all duration-700">
                 <video 
                   className="w-full h-auto block" 
@@ -192,9 +182,13 @@ const Design: React.FC = () => {
         </div>
       </section>
 
+      {/* Modified Footer */}
       <footer className="text-center py-20 border-t border-gray-100">
+        <p className="text-xl text-gray-400 font-light mb-2">
+          Want to explore more?
+        </p>
         <p className="text-xl text-gray-400 font-light">
-          Want to explore more? <br/> Connect with me on <a href="https://www.linkedin.com/in/tracey-chen-313245290/" target="_blank" className="apple-link font-medium" rel="noreferrer">LinkedIn</a> or view my <a href="https://www.youtube.com/@traceychen2715" target="_blank" className="apple-link font-medium" rel="noreferrer">YouTube channel</a>.
+          See more social media posts on my <a href="https://www.linkedin.com/in/tracey-chen-313245290/" target="_blank" rel="noreferrer" className="text-blue-600 font-medium hover:underline">LinkedIn</a> and watch more videos on my <a href="https://www.youtube.com/@traceychen2715" target="_blank" rel="noreferrer" className="text-blue-600 font-medium hover:underline">YouTube</a>.
         </p>
       </footer>
     </div>
