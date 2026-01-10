@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -97,7 +96,8 @@ const Home: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-12 md:gap-24">
             {software.map((item) => (
               <div key={item.name} className="flex flex-col items-center group cursor-default">
-                <div className="w-10 h-10 mb-4 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 ease-out">
+                {/* Modified: Removed grayscale classes, kept scale effect */}
+                <div className="w-10 h-10 mb-4 group-hover:scale-110 transition-all duration-500 ease-out">
                   <img src={item.icon} alt={item.name} className="w-full h-full object-contain" />
                 </div>
                 <span className="text-[10px] font-bold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 text-gray-400">{item.name}</span>
@@ -113,12 +113,13 @@ const Home: React.FC = () => {
           {/* Figma Card */}
           <div className="md:col-span-8">
             <FadeIn>
-              <Link to="/figma" className="group block relative rounded-[2.5rem] overflow-hidden aspect-video shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-12 text-white">
+              <Link to="/figma" className="group block relative rounded-[2.5rem] overflow-hidden aspect-video shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-[#1d1d1f]">
+                {/* Modified: Changed object-cover to object-contain and added bg color to ensure details are seen and not too full */}
+                <img src="Home/figma.jpg" alt="Figma Design" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
                   <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">UX & UI Design</span>
                   <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Figma Project</h2>
-                  <p className="mt-4 text-gray-300 font-light max-w-md opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">Transforming complex problems into elegant, human-centered interfaces.</p>
+                  {/* Modified: Removed the paragraph description here */}
                 </div>
               </Link>
             </FadeIn>
@@ -142,9 +143,10 @@ const Home: React.FC = () => {
           {/* Visual Design Card */}
           <div className="md:col-span-12">
             <FadeIn>
-              <Link to="/design" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[21/9] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-                <img src="Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
+              <Link to="/design" className="group block relative rounded-[2.5rem] overflow-hidden aspect-[21/9] shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-[#1d1d1f]">
+                {/* Modified: Changed object-cover to object-contain for full detail visibility */}
+                <img src="Home/design.jpg" alt="Visual Design" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-12 text-white">
                   <div className="max-w-2xl">
                     <span className="text-blue-400 font-bold uppercase tracking-widest text-xs mb-3">Branding & Motion</span>
                     <h2 className="text-4xl md:text-6xl font-bold tracking-tight">Visual Design</h2>
