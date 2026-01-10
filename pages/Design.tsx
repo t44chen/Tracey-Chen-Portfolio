@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ImageComparison from '../components/ImageComparison';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Design: React.FC = () => {
   const identityImages = [
@@ -12,15 +13,11 @@ const Design: React.FC = () => {
     'Design/businesscard-2.jpg'
   ];
   
-  // 根据要求将插画分为横图和竖图两组
-  const horizontalIllustrations = [
+  const illustrationImages = [
+    'Design/2.jpg', 
     'Design/1.jpg', 
     'Design/9.jpg', 
-    'Design/8.jpg'
-  ];
-
-  const verticalIllustrations = [
-    'Design/2.jpg', 
+    'Design/8.jpg', 
     'Design/4.jpg', 
     'Design/7.jpg', 
     'Design/3.jpg', 
@@ -39,6 +36,21 @@ const Design: React.FC = () => {
     { img: 'Design/design-3.jpg' }
   ];
 
+  // 用于插画部分的滚动引用
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = current.clientWidth; // 每次滚动大约一屏的宽度
+      if (direction === 'left') {
+        current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  };
+
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
     <div className="mb-12">
       <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-3">{title}</h2>
@@ -46,14 +58,18 @@ const Design: React.FC = () => {
     </div>
   );
 
-  // 视频卡片组件，方便复用样式
+  // 视频卡片组件 - 强制 object-cover 以消除黑边
   const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
     <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-      <div className={`rounded-[2rem] overflow-hidden bg-black/5 relative h-full flex items-center justify-center`}>
+      {/* 1. 根据 vertical 属性决定容器比例：aspect-video (16:9) 或 aspect-[9/16] (9:16)
+         2. video 标签使用 object-cover，确保画面填满容器，像海报一样
+      */}
+      <div className={`rounded-[2rem] overflow-hidden bg-black relative w-full ${vertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
         <video 
-          className={`w-full ${vertical ? 'h-full object-cover' : 'h-auto block'}`}
+          className="w-full h-full object-cover" 
           controls
           poster={poster}
+          playsInline
         >
           <source src={src} type="video/mp4" />
         </video>
@@ -80,15 +96,12 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => {
-            // 只针对 logo-2 进行缩小处理
             const isLogo2 = img.includes('logo-2');
-            
             return (
               <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-white">
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Branding Asset" 
-                  // logo-2 使用 p-3 (适度缩小)，其他 logo 恢复 object-cover
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
                     ${isLogo2 ? 'object-contain p-3' : 'object-cover'}`} 
                 />
@@ -98,57 +111,70 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2: Illustration & Visual Storytelling (有灰色背景) */}
+      {/* Section 2: Illustration & Visual Storytelling (Carousel Design) */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
             title="Illustration & Visual Storytelling" 
             desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
           />
-          <div className="space-y-12">
-            {/* Illustrations - 新的布局：左侧3张横图，右侧6张竖图 */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* 左侧：3张横图/正方形 */}
-              <div className="lg:col-span-1 flex flex-col gap-6">
-                {horizontalIllustrations.map((img, i) => (
-                  <div key={i} className="rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition aspect-[4/3]">
-                    <img 
-                      src={`/Tracey-Chen-Portfolio/${img}`} 
-                      alt="Illustration" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    />
+          
+          <div className="space-y-20">
+            {/* 1. Carousel Slider Area */}
+            <div className="relative group">
+              {/* Left Button */}
+              <button 
+                onClick={() => scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+              >
+                <ChevronLeft size={24} />
+              </button>
+
+              {/* Scroll Container */}
+              <div 
+                ref={scrollRef}
+                className="flex overflow-x-auto gap-6 snap-x scrollbar-hide pb-4 px-2"
+                style={{ scrollBehavior: 'smooth' }}
+              >
+                {illustrationImages.map((img, i) => (
+                  <div key={i} className="flex-shrink-0 w-[85vw] md:w-[calc(33.333%-16px)] snap-center">
+                    <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-white">
+                      <img 
+                        src={`/Tracey-Chen-Portfolio/${img}`} 
+                        alt={`Illustration ${i}`} 
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
-              
-              {/* 右侧：6张竖图，2x3排列 */}
-              <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {verticalIllustrations.map((img, i) => (
-                  <div key={i} className="rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition aspect-[2/3]">
-                    <img 
-                      src={`/Tracey-Chen-Portfolio/${img}`} 
-                      alt="Illustration" 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                    />
-                  </div>
-                ))}
-              </div>
+
+              {/* Right Button */}
+              <button 
+                onClick={() => scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+              >
+                <ChevronRight size={24} />
+              </button>
             </div>
-            
-            {/* Comics */}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {comicImages.map((img, i) => (
-                <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
-                  <img 
-                    src={`/Tracey-Chen-Portfolio/${img}`} 
-                    alt="Comic Page" 
-                    className="w-full h-auto block group-hover:brightness-110 transition-all" 
-                  />
-                  <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/40 to-transparent">
-                    <span className="text-[10px] text-white font-bold tracking-widest uppercase">Page {i + 1}</span>
+
+            {/* 2. Comics Area */}
+            <div>
+              <h3 className="text-2xl font-semibold text-[#1d1d1f] mb-8 px-2">Short Comics</h3>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {comicImages.map((img, i) => (
+                  <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
+                    <img 
+                      src={`/Tracey-Chen-Portfolio/${img}`} 
+                      alt="Comic Page" 
+                      className="w-full h-auto block group-hover:brightness-110 transition-all" 
+                    />
+                    <div className="absolute inset-0 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-black/40 to-transparent">
+                      <span className="text-[10px] text-white font-bold tracking-widest uppercase">Page {i + 1}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -199,27 +225,32 @@ const Design: React.FC = () => {
             title="Motion Media & Video Production" 
             desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
           />
-          {/* 使用12列网格来实现：横-竖-竖 的布局 */}
+          {/* Grid Layout:
+            MD+: [ Video 1 (6 cols) ] [ Video 2 (3 cols) ] [ Video 3 (3 cols) ]
+            这种布局配合 object-cover 可以完美实现你的“图2”效果
+          */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             
-            {/* Video 1 (Horizontal): 占 6/12 列 (50%) - 现在会显示封面和正常比例 */}
+            {/* Video 1 (Horizontal) */}
             <div className="md:col-span-6 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" 
                 poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
+                vertical={false} 
               />
             </div>
 
-            {/* Video 2 (Vertical): 占 3/12 列 (25%) */}
+            {/* Video 2 (Vertical) */}
             <div className="md:col-span-3 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
                 vertical={true}
-                // 如果有 Video-2 的封面，请在这里添加 poster="/path/to/poster.jpg"
+                // 请确保你也有一张竖版的封面图，如果没有，视频第一帧会被拉伸填满，依然比黑框好看
+                // poster="/Tracey-Chen-Portfolio/Design/video-poster-new.jpg"
               />
             </div>
 
-            {/* Reel 1 (Vertical): 占 3/12 列 (25%) - 现在会显示封面和正常比例 */}
+            {/* Reel 1 (Vertical) */}
             <div className="md:col-span-3 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" 
