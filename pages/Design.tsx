@@ -4,8 +4,8 @@ import ImageComparison from '../components/ImageComparison';
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', // 会被特殊处理，缩小一点点但不会太小
-    'Design/logo-3.jpg', 
+    'Design/logo-2.jpg', 
+    'Design/logo-3.jpg', // 现在这个会被应用特殊样式
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
     'Design/businesscard-1.jpg', 
@@ -54,16 +54,17 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => {
-            const isTargetLogo = img.includes('logo-2');
+            // 修改点：现在检测文件名是否包含 logo-3
+            const isTargetLogo = img.includes('logo-3');
             
             return (
               <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-white">
                 <img 
                   src={`/Tracey-Chen-Portfolio/${img}`} 
                   alt="Branding Asset" 
-                  // 修改点1: 从 p-12 改为 p-5。这会减少留白，让 Logo 变大。
+                  // isTargetLogo 为真时，使用 object-contain 且加一点内边距(p-6)让它显示完整且不贴边
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
-                    ${isTargetLogo ? 'object-contain p-5' : 'object-cover'}`} 
+                    ${isTargetLogo ? 'object-contain p-6' : 'object-cover'}`} 
                 />
               </div>
             );
@@ -78,7 +79,7 @@ const Design: React.FC = () => {
           desc="Beyond brand design, I explore visual storytelling through digital illustration and short-form comics created in Procreate." 
         />
         <div className="space-y-12">
-          {/* Illustrations - 保持瀑布流 */}
+          {/* Illustrations - 瀑布流布局 */}
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {illustrationImages.map((img, i) => (
               <div key={i} className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm group hover:shadow-xl transition-all duration-500 apple-transition">
@@ -91,7 +92,7 @@ const Design: React.FC = () => {
             ))}
           </div>
           
-          {/* Comics - 修改点2: 使用 grid-cols-5 确保5张图在一条水平线上 */}
+          {/* Comics - 保持水平一行显示 */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {comicImages.map((img, i) => (
               <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
@@ -115,7 +116,7 @@ const Design: React.FC = () => {
           title="Brand Identity Concepts" 
           desc="A strategic redesign modernizing The Body Shop’s identity through a cohesive visual system and high-fidelity digital packaging mockups." 
         />
-        {/* 修改点3: 移除了 'scrollbar-hide'，现在滚动条会显示出来 */}
+        {/* 横向滚动区域 */}
         <div className="flex overflow-x-auto pb-8 -mx-6 px-6 space-x-8 snap-x">
           {brandConcepts.map((concept, i) => (
             <div key={i} className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center">
@@ -148,7 +149,7 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 5: Motion Media */}
+      {/* Section 5: Motion Media - 美化版 */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
@@ -156,33 +157,42 @@ const Design: React.FC = () => {
             desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="group space-y-6">
-              <div className="rounded-[2.5rem] overflow-hidden shadow-lg bg-black group-hover:shadow-2xl transition-all duration-700">
-                <video 
-                  className="w-full h-auto block" 
-                  controls
-                  poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
-                >
-                  <source src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" type="video/mp4" />
-                </video>
+            {/* Video 1 */}
+            <div className="group">
+              {/* 外层增加白色卡片背景和内边距，形成'画框'效果 */}
+              <div className="bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
+                <div className="rounded-[2rem] overflow-hidden bg-black relative">
+                   <video 
+                    className="w-full h-auto block" 
+                    controls
+                    poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
+                  >
+                    <source src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </div>
             </div>
-            <div className="group space-y-6">
-              <div className="rounded-[2.5rem] overflow-hidden shadow-lg bg-black group-hover:shadow-2xl transition-all duration-700">
-                <video 
-                  className="w-full h-auto block" 
-                  controls
-                  poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
-                >
-                  <source src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" type="video/mp4" />
-                </video>
+
+            {/* Video 2 */}
+            <div className="group">
+              {/* 同样的卡片样式 */}
+              <div className="bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
+                <div className="rounded-[2rem] overflow-hidden bg-black relative">
+                  <video 
+                    className="w-full h-auto block" 
+                    controls
+                    poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
+                  >
+                    <source src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modified Footer */}
+      {/* Footer */}
       <footer className="text-center py-20 border-t border-gray-100">
         <p className="text-xl text-gray-400 font-light mb-2">
           Want to explore more?
