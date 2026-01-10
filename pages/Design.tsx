@@ -2,18 +2,18 @@ import React from 'react';
 
 const Design: React.FC = () => {
   const identityImages = [
-    '/Design/logo-1.jpg', '/Design/logo-2.jpg', '/Design/logo-3.jpg', 
-    '/Design/Banner-1.jpg', '/Design/Banner-2.jpg', 
-    '/Design/business-card-1.jpg', '/Design/business-card-2.jpg'
+    'Design/logo-1.jpg', 'Design/logo-2.jpg', 'Design/logo-3.jpg', 
+    'Design/Banner-1.jpg', 'Design/Banner-2.jpg', 
+    'Design/business-card-1.jpg', 'Design/business-card-2.jpg'
   ];
   
-  const illustrationImages = ['/Design/1.jpg','/Design/9.jpg','/Design/2.jpg', '/Design/4.jpg', '/Design/7.jpg', '/Design/3.jpg', '/Design/13.jpg', '/Design/12.jpg'];
-  const comicImages = ['/Design/comic-1.jpg', '/Design/comic-2.jpg', '/Design/comic-3.jpg', '/Design/comic-4.jpg', '/Design/comic-5.jpg'];
+  const illustrationImages = ['Design/1.jpg','Design/9.jpg','Design/2.jpg', 'Design/4.jpg', 'Design/7.jpg', 'Design/3.jpg', 'Design/13.jpg', 'Design/12.jpg'];
+  const comicImages = ['Design/comic-1.jpg', 'Design/comic-2.jpg', 'Design/comic-3.jpg', 'Design/comic-4.jpg', 'Design/comic-5.jpg'];
   
   const brandConcepts = [
-    { img: '/Design/design-1.jpg' },
-    { img: '/Design/design-2.jpg' },
-    { img: '/Design/design-3.jpg' }
+    { img: 'Design/design-1.jpg' },
+    { img: 'Design/design-2.jpg' },
+    { img: 'Design/design-3.jpg' }
   ];
 
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
@@ -34,7 +34,6 @@ const Design: React.FC = () => {
         </p>
       </header>
 
-      {/* Section 1: Identity & Commercial Branding */}
       <section>
         <SectionHeader 
           title="Identity & Commercial Branding" 
@@ -43,14 +42,12 @@ const Design: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {identityImages.map((img, i) => (
             <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02]">
-              {/* 核心修正：直接使用 img，不添加 images/ 前缀 */}
               <img src={img} alt="Branding Asset" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
             </div>
           ))}
         </div>
       </section>
 
-      {/* Section 2: Illustration & Visual Storytelling */}
       <section>
         <SectionHeader 
           title="Illustration & Visual Storytelling" 
@@ -97,7 +94,7 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 4: Post-Production & Retouching (移除 ImageComparison) */}
+      {/* Section 4: Post-Production & Retouching (移除报错的组件) */}
       <section>
         <SectionHeader 
           title="Post-Production & Retouching" 
@@ -105,15 +102,15 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="rounded-[2.5rem] overflow-hidden shadow-lg">
-            <img src="/Design/1-after.jpg" alt="After" className="w-full h-auto" />
+            <img src="Design/1-after.jpg" alt="After" className="w-full h-auto" />
           </div>
           <div className="rounded-[2.5rem] overflow-hidden shadow-lg">
-            <img src="/Design/2-after.jpg" alt="After" className="w-full h-auto" />
+            <img src="Design/2-after.jpg" alt="After" className="w-full h-auto" />
           </div>
         </div>
       </section>
 
-      {/* Section 5: Motion Media */}
+      {/* Section 5: Motion Media (保留原始设计) */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
@@ -123,15 +120,23 @@ const Design: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="group space-y-6">
               <div className="rounded-[2.5rem] overflow-hidden shadow-lg bg-black aspect-video group-hover:shadow-2xl transition-all duration-700">
-                <video className="w-full h-full object-cover" controls poster="/Design/video-poster-1.jpg">
-                  <source src="/Design/Video-1.mp4" type="video/mp4" />
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="Design/video-poster-1.jpg"
+                >
+                  <source src="Design/Video-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
             <div className="group space-y-6">
               <div className="rounded-[2.5rem] overflow-hidden shadow-lg bg-black aspect-video group-hover:shadow-2xl transition-all duration-700">
-                <video className="w-full h-full object-cover" controls poster="/Design/video-poster-2.jpg">
-                  <source src="/Design/reel-1.mp4" type="video/mp4" />
+                <video 
+                  className="w-full h-full object-cover"
+                  controls
+                  poster="Design/video-poster-2.jpg"
+                >
+                  <source src="Design/reel-1.mp4" type="video/mp4" />
                 </video>
               </div>
             </div>
@@ -141,7 +146,7 @@ const Design: React.FC = () => {
 
       <footer className="text-center py-20 border-t border-gray-100">
         <p className="text-xl text-gray-400 font-light">
-          Want to explore more? <br/> Connect with me on <a href="https://www.linkedin.com/in/tracey-chen-313245290/" target="_blank" className="text-blue-600 font-medium hover:underline transition-colors">LinkedIn</a> or view my <a href="https://www.youtube.com/@traceychen2715" target="_blank" className="text-blue-600 font-medium hover:underline transition-colors">YouTube channel</a>.
+          Want to explore more? <br/> Connect with me on <a href="https://www.linkedin.com/in/tracey-chen-313245290/" target="_blank" className="apple-link font-medium">LinkedIn</a> or view my <a href="https://www.youtube.com/@traceychen2715" target="_blank" className="apple-link font-medium">YouTube channel</a>.
         </p>
       </footer>
     </div>
