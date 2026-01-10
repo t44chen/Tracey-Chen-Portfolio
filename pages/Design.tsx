@@ -5,16 +5,16 @@ const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 'Design/logo-2.jpg', 'Design/logo-3.jpg', 
     'Design/Banner-1.jpg', 'Design/Banner-2.jpg', 
-    'Design/business-card-1.jpg', 'Design/business-card-2.jpg'
+    'Design/businesscard-1.jpg', 'Design/businesscard-2.jpg'
   ];
   
   const illustrationImages = ['Design/1.jpg','Design/9.jpg','Design/2.jpg', 'Design/4.jpg', 'Design/7.jpg', 'Design/3.jpg', 'Design/13.jpg', 'Design/12.jpg'];
   const comicImages = ['Design/comic-1.jpg', 'Design/comic-2.jpg', 'Design/comic-3.jpg', 'Design/comic-4.jpg', 'Design/comic-5.jpg'];
   
   const brandConcepts = [
-    { img: 'Design/design-1.jpg' },
-    { img: 'Design/design-2.jpg' },
-    { img: 'Design/design-3.jpg' }
+    { 'Design/design-1.jpg' },
+    { 'Design/design-2.jpg' },
+    { 'Design/design-3.jpg' }
   ];
 
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
