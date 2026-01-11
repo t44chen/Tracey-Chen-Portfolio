@@ -4,7 +4,7 @@ import ImageComparison from '../components/ImageComparison';
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', 
+    'Design/logo-2.jpg', // 特殊处理：缩小一点 (p-3)
     'Design/logo-3.jpg', 
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
@@ -12,6 +12,7 @@ const Design: React.FC = () => {
     'Design/businesscard-2.jpg'
   ];
   
+  // 排序：2(左), 1(中), 9(右), 然后是其他
   const illustrationImages = [
     'Design/2.jpg', 
     'Design/1.jpg', 
@@ -35,17 +36,30 @@ const Design: React.FC = () => {
     { img: 'Design/design-3.jpg' }
   ];
 
+  // 用于插画部分的滚动引用
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // 循环滚动逻辑
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { current } = scrollRef;
+      const scrollAmount = current.clientWidth / 2; // 每次滚动半屏
+      const maxScrollLeft = current.scrollWidth - current.clientWidth; // 最大滚动距离
 
-      const scrollAmount = current.clientWidth / 2; 
       if (direction === 'left') {
-        current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        // 如果已经在最左边（容差10px），点击左箭头跳转到最后
+        if (current.scrollLeft <= 10) {
+           current.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+        } else {
+           current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
       } else {
-        current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        // 如果已经在最右边（容差10px），点击右箭头跳转到最开始
+        if (current.scrollLeft >= maxScrollLeft - 10) {
+           current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+           current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
       }
     }
   };
@@ -57,10 +71,9 @@ const Design: React.FC = () => {
     </div>
   );
 
-
+  // 视频卡片组件
   const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
     <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-      {/* 强制填充容器，消除黑边 */}
       <div className={`rounded-[2rem] overflow-hidden bg-black relative w-full ${vertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
         <video 
           className="w-full h-full object-cover" 
@@ -108,7 +121,7 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 2: Illustration & Visual Storytelling (Carousel Design - Original Sizes) */}
+      {/* Section 2: Illustration & Visual Storytelling (Carousel) */}
       <section className="bg-gray-50 -mx-6 px-6 py-24 rounded-[4rem]">
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
@@ -119,7 +132,7 @@ const Design: React.FC = () => {
           <div className="space-y-20">
             {/* 1. Carousel Slider Area */}
             <div className="relative group">
-              {/* Left Button (SVG Arrow) */}
+              {/* Left Button */}
               <button 
                 onClick={() => scroll('left')}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white cursor-pointer"
@@ -130,19 +143,15 @@ const Design: React.FC = () => {
                 </svg>
               </button>
 
-              {/* Scroll Container - Modified for original sizes */}
+              {/* Scroll Container */}
               <div 
                 ref={scrollRef}
-                // 给容器设置一个固定高度 (例如 30rem)，并允许横向滚动
                 className="flex overflow-x-auto gap-6 snap-x scrollbar-hide px-2 h-[30rem] items-center"
                 style={{ scrollBehavior: 'smooth' }}
               >
                 {illustrationImages.map((img, i) => (
-                  // 让每个图片容器高度充满，宽度自适应 (w-auto)
                   <div key={i} className="flex-shrink-0 h-full w-auto snap-center py-2">
-                    // 移除了 aspect-[4/5]，保留圆角和阴影
                     <div className="h-full w-auto rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-white">
-                      // 图片高度充满，宽度自适应，保持原始比例
                       <img 
                         src={`/Tracey-Chen-Portfolio/${img}`} 
                         alt={`Illustration ${i}`} 
@@ -153,7 +162,7 @@ const Design: React.FC = () => {
                 ))}
               </div>
 
-              {/* Right Button (SVG Arrow) */}
+              {/* Right Button */}
               <button 
                 onClick={() => scroll('right')}
                 className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white cursor-pointer"
@@ -232,7 +241,6 @@ const Design: React.FC = () => {
             title="Motion Media & Video Production" 
             desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
           />
-          {/* Grid Layout: [ Video 1 (6 cols) ] [ Video 2 (3 cols) ] [ Video 3 (3 cols) ] */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             
             {/* Video 1 (Horizontal) */}
@@ -248,6 +256,7 @@ const Design: React.FC = () => {
             <div className="md:col-span-3 w-full">
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
+                poster="/Tracey-Chen-Portfolio/Design/video-poster-3.jpg"
                 vertical={true}
               />
             </div>
