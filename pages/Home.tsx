@@ -69,7 +69,7 @@ const Home: React.FC = () => {
                   href="mailto:t44chen@uwaterloo.ca"
                   className="inline-block px-8 py-4 bg-[#1d1d1f] text-white rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all hover:shadow-xl active:scale-95 shadow-lg"
                 >
-                  Work with me
+                  Say Hello
                 </a>
               </div>
             </FadeIn>
