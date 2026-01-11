@@ -2,11 +2,10 @@ import React from 'react';
 
 const Photography: React.FC = () => {
   const images = [
-    'IMG_0063.jpg', 'IMG_1732.JPG', 'IMG_0225.JPG', 'IMG_0227.JPG', 
-    'IMG_0231.JPG', 'IMG_0232.JPG', 'IMG_0237.jpg', 
-    'IMG_2787.JPG', 'IMG_8382.JPG', 'IMG_5329.JPG', 'IMG_4810.JPG', 
-    'IMG_9351.JPG', 'IMG_9731.JPG', 'DSCF1291.jpg', 'IMG_8383.jpg',
-    'IMG_8688.JPG', 'IMG_8699.JPG', 'IMG_8370.jpg'
+    'IMG_0063.jpg', 'IMG_1732.JPG', 'IMG_5329.JPG', 'IMG_0225.JPG', 'IMG_0227.JPG',
+    'IMG_0231.JPG', 'IMG_0232.JPG', 'IMG_2787.JPG', 'IMG_8382.JPG', 'IMG_6727.jpg',
+    'IMG_9729.jpg', 'IMG_8683.JPG', 'IMG_8370.jpg', 'IMG_6208.JPG',
+    'IMG_9351.JPG', 'IMG_9731.JPG', 'DSCF1291.jpg', 'IMG_8383.jpg', 'IMG_9728.jpg'
   ];
 
   return (
