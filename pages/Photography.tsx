@@ -1,13 +1,12 @@
 import React from 'react';
 
 const Photography: React.FC = () => {
-  // 1. 已移除 'IMG_8370.jpg'
   const images = [
     'IMG_0063.jpg', 'IMG_1732.JPG', 'IMG_0225.JPG', 'IMG_0227.JPG', 
     'IMG_0231.JPG', 'IMG_0232.JPG', 'IMG_0237.jpg', 
     'IMG_2787.JPG', 'IMG_8382.JPG', 'IMG_5329.JPG', 'IMG_4810.JPG', 
     'IMG_9351.JPG', 'IMG_9731.JPG', 'DSCF1291.jpg', 'IMG_8383.jpg',
-    'IMG_8688.JPG', 'IMG_8699.JPG'
+    'IMG_8688.JPG', 'IMG_8699.JPG', 'IMG_8370.jpg'
   ];
 
   return (
@@ -32,31 +31,29 @@ const Photography: React.FC = () => {
                 loading="lazy"
               />
               
-              {/* Overlay: 仅保留轻微变暗效果，去掉了文字标签 */}
+              {/* Overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
             </div>
-            {/* 2. 已移除底部的文字标签 (Canon/Fujifilm) */}
           </div>
         ))}
       </div>
       
-      {/* 3. 新的底部部分：左图右文 */}
+      {/* 底部部分：保留图片和文字，删除了标题 */}
       <div className="mt-32 border-t border-gray-100 pt-20">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           
-          {/* 左侧：图片 */}
+          {/* 左侧：图片 IMG_8051.jpg */}
           <div className="w-full md:w-1/2 relative group">
             <div className="absolute inset-0 bg-blue-100 rounded-3xl transform rotate-2 group-hover:rotate-1 transition-transform duration-500"></div>
             <img 
-              src="/Tracey-Chen-Portfolio/Photography/IMG_8051.JPG" 
+              src="/Tracey-Chen-Portfolio/Photography/IMG_8051.jpg" 
               alt="Photography philosophy" 
               className="relative w-full h-auto rounded-3xl shadow-lg object-cover transform transition-transform duration-500"
             />
           </div>
 
-          {/* 右侧：文案 */}
+          {/* 右侧：纯文案，已移除标题 */}
           <div className="w-full md:w-1/2 flex flex-col justify-center text-left">
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">Captured Memories</h3>
             <p className="text-lg text-gray-600 leading-relaxed font-light mb-6">
               Photography is my medium for documenting the world. I am particularly drawn to the telephoto perspective, using it to capture everything from the moon to natural landscapes.
             </p>
