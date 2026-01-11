@@ -16,21 +16,21 @@ const Figma: React.FC = () => {
       id: 2, 
       img: '/Tracey-Chen-Portfolio/Figma/PJ2.jpg', 
       title: 'MedSync - Walk-in Clinic Management App', 
-      desc: 'A multi-functional healthcare app collaborating with engineering students, featuring waitlists, medication tracking, and clinic navigation.',
+      desc: 'A multifunctional healthcare app collaborating with engineering students, offering features such as appointment, waitlists, medication management, and clinic navigation.',
       tags: ['Collaboration', 'Mobile UI', 'Healthcare']
     },
     { 
       id: 3, 
       img: '/Tracey-Chen-Portfolio/Figma/PJ3.jpg', 
       title: 'Mediflect - Medication Tracker & Education', 
-      desc: 'A group-designed application focused on medication schedules and providing detailed pharmaceutical information for patients.',
+      desc: 'A group design project focused on medication schedules and providing detailed pharmaceutical information for patients.',
       tags: ['Group Project', 'HealthTech', 'UX Research']
     },
     { 
       id: 4, 
       img: '/Tracey-Chen-Portfolio/Figma/PJ4.jpg', 
       title: 'Little Lemon - Restaurant Ordering & Reservation', 
-      desc: 'An end-to-end mobile interface design for a dining experience, including table booking, menu browsing, and seamless ordering.',
+      desc: 'An end-to-end mobile interface design for a dining experience, including table booking, menu browsing, and ordering.',
       tags: ['E-commerce', 'Mobile UI', 'Case Study']
     },
     { 
