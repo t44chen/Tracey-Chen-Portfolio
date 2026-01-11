@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
             href="mailto:t44chen@uwaterloo.ca" 
             className="px-5 py-2 bg-[#1d1d1f] text-white text-xs font-semibold rounded-full hover:bg-opacity-80 transition-all apple-transition"
           >
-            Say Hello
+            Get in touch
           </a>
         </div>
       </div>
