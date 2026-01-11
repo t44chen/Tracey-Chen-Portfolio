@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
 import ImageComparison from '../components/ImageComparison';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+// 这里不需要导入 lucide-react 了
 
 const Design: React.FC = () => {
   const identityImages = [
     'Design/logo-1.jpg', 
-    'Design/logo-2.jpg', 
+    'Design/logo-2.jpg', // 特殊处理：缩小一点 (p-3)
     'Design/logo-3.jpg', 
     'Design/Banner-1.jpg', 
     'Design/Banner-2.jpg', 
@@ -13,6 +14,7 @@ const Design: React.FC = () => {
     'Design/businesscard-2.jpg'
   ];
   
+  // 排序：2(左), 1(中), 9(右), 然后是其他
   const illustrationImages = [
     'Design/2.jpg', 
     'Design/1.jpg', 
@@ -58,12 +60,10 @@ const Design: React.FC = () => {
     </div>
   );
 
-  // 视频卡片组件 - 强制 object-cover 以消除黑边
+  // 视频卡片组件
   const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
     <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-      {/* 1. 根据 vertical 属性决定容器比例：aspect-video (16:9) 或 aspect-[9/16] (9:16)
-         2. video 标签使用 object-cover，确保画面填满容器，像海报一样
-      */}
+      {/* 强制填充容器，消除黑边 */}
       <div className={`rounded-[2rem] overflow-hidden bg-black relative w-full ${vertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
         <video 
           className="w-full h-full object-cover" 
@@ -122,12 +122,15 @@ const Design: React.FC = () => {
           <div className="space-y-20">
             {/* 1. Carousel Slider Area */}
             <div className="relative group">
-              {/* Left Button */}
+              {/* Left Button (SVG Arrow) */}
               <button 
                 onClick={() => scroll('left')}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white cursor-pointer"
+                aria-label="Scroll left"
               >
-                <ChevronLeft size={24} />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
               </button>
 
               {/* Scroll Container */}
@@ -149,12 +152,15 @@ const Design: React.FC = () => {
                 ))}
               </div>
 
-              {/* Right Button */}
+              {/* Right Button (SVG Arrow) */}
               <button 
                 onClick={() => scroll('right')}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white cursor-pointer"
+                aria-label="Scroll right"
               >
-                <ChevronRight size={24} />
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
               </button>
             </div>
 
@@ -225,10 +231,7 @@ const Design: React.FC = () => {
             title="Motion Media & Video Production" 
             desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
           />
-          {/* Grid Layout:
-            MD+: [ Video 1 (6 cols) ] [ Video 2 (3 cols) ] [ Video 3 (3 cols) ]
-            这种布局配合 object-cover 可以完美实现你的“图2”效果
-          */}
+          {/* Grid Layout: [ Video 1 (6 cols) ] [ Video 2 (3 cols) ] [ Video 3 (3 cols) ] */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             
             {/* Video 1 (Horizontal) */}
@@ -245,8 +248,6 @@ const Design: React.FC = () => {
               <VideoCard 
                 src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
                 vertical={true}
-                // 请确保你也有一张竖版的封面图，如果没有，视频第一帧会被拉伸填满，依然比黑框好看
-                // poster="/Tracey-Chen-Portfolio/Design/video-poster-new.jpg"
               />
             </div>
 
