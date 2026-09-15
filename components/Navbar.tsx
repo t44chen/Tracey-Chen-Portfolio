@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-8">
           <Link to="/" className="text-sm font-medium hover:text-blue-600 transition-colors">Home</Link>
           <Link to="/design" className="text-sm font-medium hover:text-blue-600 transition-colors">Design</Link>
-          <Link to="/figma" className="text-sm font-medium hover:text-blue-600 transition-colors">Figma</Link>
+          <Link to="/figma" className="text-sm font-medium hover:text-blue-600 transition-colors">UX/UI</Link>
           <Link to="/photography" className="text-sm font-medium hover:text-blue-600 transition-colors">Photography</Link>
           <a 
             href="mailto:t44chen@uwaterloo.ca" 

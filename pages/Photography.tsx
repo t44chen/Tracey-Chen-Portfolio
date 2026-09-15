@@ -1,4 +1,5 @@
 import React from 'react';
+import { publicAsset } from '../utils/assets';
 
 const Photography: React.FC = () => {
   const images = [
@@ -24,7 +25,7 @@ const Photography: React.FC = () => {
           <div key={i} className="break-inside-avoid group relative">
             <div className="rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 bg-gray-50">
               <img 
-                src={`/Tracey-Chen-Portfolio/Photography/${img}`} 
+                src={publicAsset(`Photography/${img}`)}
                 alt={`Photo ${i}`} 
                 className="w-full h-auto block hover:scale-[1.03] transition-transform duration-1000" 
                 loading="lazy"
@@ -45,7 +46,7 @@ const Photography: React.FC = () => {
           <div className="w-full md:w-1/2 relative group">
             <div className="absolute inset-0 bg-blue-100 rounded-3xl transform rotate-2 group-hover:rotate-1 transition-transform duration-500"></div>
             <img 
-              src="/Tracey-Chen-Portfolio/Photography/IMG_8051.jpg" 
+              src={publicAsset('Photography/IMG_8051.jpg')}
               alt="Photography philosophy" 
               className="relative w-full h-auto rounded-3xl shadow-lg object-cover transform transition-transform duration-500"
             />

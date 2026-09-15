@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import ImageComparison from '../components/ImageComparison';
+import { publicAsset } from '../utils/assets';
 
 const Design: React.FC = () => {
   const identityImages = [
@@ -36,8 +37,42 @@ const Design: React.FC = () => {
     { img: 'Design/design-3.jpg' }
   ];
 
+  const motionVideos = [
+    {
+      title: 'Event Highlight Reel',
+      type: 'EVENT / SOCIAL MEDIA',
+      url: 'https://youtube.com/shorts/BaZNxTdrY50?si=sie-z3Dwm0Oh7X2W',
+      thumbnail: 'https://i.ytimg.com/vi/BaZNxTdrY50/hqdefault.jpg',
+    },
+    {
+      title: 'Professional Interview Video',
+      type: 'INTERVIEW',
+      url: 'https://youtu.be/QNGew-YaW_I?si=Oq6276N_-fp8xJRr',
+      thumbnail: 'https://i.ytimg.com/vi/QNGew-YaW_I/hqdefault.jpg',
+    },
+    {
+      title: 'Customer Review Video',
+      type: 'INTERVIEW',
+      url: 'https://youtu.be/LtkNSS4YSKw?si=C36u3go7cYRYaGa8',
+      thumbnail: 'https://i.ytimg.com/vi/LtkNSS4YSKw/hqdefault.jpg',
+    },
+    {
+      title: 'The Body Shop Product Ad',
+      type: 'COMMERCIAL',
+      url: 'https://youtu.be/jI3nUqJexWI?si=RBkBa3jffh-C8Ox4',
+      thumbnail: 'https://i.ytimg.com/vi/jI3nUqJexWI/hqdefault.jpg',
+    },
+    {
+      title: 'The Body Shop Motion Ad',
+      type: 'MOTION DESIGN',
+      url: 'https://youtube.com/shorts/Wpu2XyELWL4?si=BK3gmiEGyNIDV0qC',
+      thumbnail: 'https://i.ytimg.com/vi/Wpu2XyELWL4/hqdefault.jpg',
+    },
+  ];
+
   // 用于插画部分的滚动引用
   const scrollRef = useRef<HTMLDivElement>(null);
+  const motionScrollRef = useRef<HTMLDivElement>(null);
 
   // 循环滚动逻辑
   const scroll = (direction: 'left' | 'right') => {
@@ -64,26 +99,21 @@ const Design: React.FC = () => {
     }
   };
 
+  const scrollMotionVideos = (direction: 'left' | 'right') => {
+    if (motionScrollRef.current) {
+      const firstCard = motionScrollRef.current.firstElementChild as HTMLElement | null;
+      const scrollAmount = firstCard ? firstCard.offsetWidth + 24 : motionScrollRef.current.clientWidth;
+      motionScrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const SectionHeader = ({ title, desc }: { title: string; desc: string }) => (
     <div className="mb-12">
       <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f] mb-3">{title}</h2>
       <p className="text-lg text-gray-500 max-w-2xl font-light">{desc}</p>
-    </div>
-  );
-
-  // 视频卡片组件
-  const VideoCard = ({ src, poster, vertical = false }: { src: string; poster?: string; vertical?: boolean }) => (
-    <div className="h-full bg-white p-3 rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-700">
-      <div className={`rounded-[2rem] overflow-hidden bg-black relative w-full ${vertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
-        <video 
-          className="w-full h-full object-cover" 
-          controls
-          poster={poster}
-          playsInline
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      </div>
     </div>
   );
 
@@ -110,7 +140,7 @@ const Design: React.FC = () => {
             return (
               <div key={i} className="group relative aspect-square rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700 apple-transition hover:scale-[1.02] bg-white">
                 <img 
-                  src={`/Tracey-Chen-Portfolio/${img}`} 
+                  src={publicAsset(img)}
                   alt="Branding Asset" 
                   className={`w-full h-full transition-transform duration-1000 group-hover:scale-110 
                     ${isLogo2 ? 'object-contain p-3' : 'object-cover'}`} 
@@ -153,7 +183,7 @@ const Design: React.FC = () => {
                   <div key={i} className="flex-shrink-0 h-full w-auto snap-center py-2">
                     <div className="h-full w-auto rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 bg-white">
                       <img 
-                        src={`/Tracey-Chen-Portfolio/${img}`} 
+                        src={publicAsset(img)}
                         alt={`Illustration ${i}`} 
                         className="h-full w-auto hover:scale-105 transition-transform duration-700"
                       />
@@ -181,7 +211,7 @@ const Design: React.FC = () => {
                 {comicImages.map((img, i) => (
                   <div key={i} className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 apple-transition">
                     <img 
-                      src={`/Tracey-Chen-Portfolio/${img}`} 
+                      src={publicAsset(img)}
                       alt="Comic Page" 
                       className="w-full h-auto block group-hover:brightness-110 transition-all" 
                     />
@@ -196,8 +226,8 @@ const Design: React.FC = () => {
         </div>
       </section>
 
-      {/* Section 3: Brand Identity Concepts */}
-      <section>
+      {/* Section 3: Brand Identity Concepts — temporarily hidden; retain for future use. */}
+      <section hidden>
         <SectionHeader 
           title="Brand Identity Concepts" 
           desc="A strategic redesign modernizing The Body Shop’s identity through a cohesive visual system and high-fidelity digital packaging mockups." 
@@ -207,7 +237,7 @@ const Design: React.FC = () => {
             <div key={i} className="flex-shrink-0 w-[85vw] md:w-[600px] snap-center">
               <div className="group relative rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-700 apple-transition">
                 <img 
-                  src={`/Tracey-Chen-Portfolio/${concept.img}`} 
+                  src={publicAsset(concept.img)}
                   alt="Brand Concept" 
                   className="w-full h-auto object-cover" 
                 />
@@ -226,10 +256,10 @@ const Design: React.FC = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-4">
-            <ImageComparison before="/Tracey-Chen-Portfolio/Design/1-before.jpg" after="/Tracey-Chen-Portfolio/Design/1-after.jpg" />
+            <ImageComparison before={publicAsset('Design/1-before.jpg')} after={publicAsset('Design/1-after.jpg')} />
           </div>
           <div className="space-y-4">
-            <ImageComparison before="/Tracey-Chen-Portfolio/Design/2-before.jpg" after="/Tracey-Chen-Portfolio/Design/2-after.JPG" />
+            <ImageComparison before={publicAsset('Design/2-before.jpg')} after={publicAsset('Design/2-after.JPG')} />
           </div>
         </div>
       </section>
@@ -239,37 +269,66 @@ const Design: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <SectionHeader 
             title="Motion Media & Video Production" 
-            desc="Delivering high-end commercial video content for startups, from brand advertisements to social media Reels." 
+            desc="Creating engaging video content across interviews, commercial projects, and short-form social media."
           />
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-            
-            {/* Video 1 (Horizontal) */}
-            <div className="md:col-span-6 w-full">
-              <VideoCard 
-                src="/Tracey-Chen-Portfolio/Design/Video-1.mp4" 
-                poster="/Tracey-Chen-Portfolio/Design/video-poster-1.jpg"
-                vertical={false} 
-              />
+          <div className="group relative">
+            <button
+              onClick={() => scrollMotionVideos('left')}
+              className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-3 text-[#1d1d1f] shadow-lg transition-all hover:bg-white md:-left-6"
+              aria-label="Previous video"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+            <div
+              ref={motionScrollRef}
+              className="flex gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth scrollbar-hide px-2"
+            >
+              {motionVideos.map((video) => (
+                <a
+                  key={video.url}
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/card w-[82vw] flex-none snap-center overflow-hidden rounded-[2rem] bg-white shadow-sm transition-all duration-700 hover:shadow-2xl md:w-[calc((100%-3rem)/3)]"
+                  aria-label={`Watch ${video.title} on YouTube`}
+                >
+                  <div className="relative aspect-video overflow-hidden bg-gray-200">
+                    <img
+                      src={video.thumbnail}
+                      alt={`${video.title} YouTube thumbnail`}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/10 transition-colors group-hover/card:bg-black/25" />
+                    <span className="absolute inset-0 m-auto flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-red-600 shadow-lg transition-transform duration-500 group-hover/card:scale-110" aria-hidden="true">
+                      <svg className="ml-0.5 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-4 px-6 py-5">
+                    <div>
+                      <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">{video.type}</p>
+                      <h3 className="text-xl font-semibold tracking-tight text-[#1d1d1f]">{video.title}</h3>
+                    </div>
+                    <svg className="h-5 w-5 flex-none text-gray-400 transition-transform duration-300 group-hover/card:translate-x-1 group-hover/card:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M7 17 17 7M7 7h10v10" />
+                    </svg>
+                  </div>
+                </a>
+              ))}
             </div>
-
-            {/* Video 2 (Vertical) */}
-            <div className="md:col-span-3 w-full">
-              <VideoCard 
-                src="/Tracey-Chen-Portfolio/Design/Video-2.mp4" 
-                poster="/Tracey-Chen-Portfolio/Design/video-poster-3.jpg"
-                vertical={true}
-              />
-            </div>
-
-            {/* Reel 1 (Vertical) */}
-            <div className="md:col-span-3 w-full">
-              <VideoCard 
-                src="/Tracey-Chen-Portfolio/Design/reel-1.mp4" 
-                poster="/Tracey-Chen-Portfolio/Design/video-poster-2.jpg"
-                vertical={true}
-              />
-            </div>
-
+            <button
+              onClick={() => scrollMotionVideos('right')}
+              className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-3 text-[#1d1d1f] shadow-lg transition-all hover:bg-white md:-right-6"
+              aria-label="Next video"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
           </div>
         </div>
       </section>
