@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { publicAsset } from '../utils/assets';
 
 const Figma: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -7,42 +8,42 @@ const Figma: React.FC = () => {
   const projects = [
     { 
       id: 1, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ1.jpg', 
+      img: publicAsset('Figma/PJ1.jpg'),
       title: 'Toronto Fertility Care - Website Redesign', 
       desc: 'Redesigned the official website for a fertility clinic to improve user navigation and modern medical branding.',
       tags: ['Web Redesign', 'Academic Project']
     },
     { 
       id: 2, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ2.jpg', 
+      img: publicAsset('Figma/PJ2.jpg'),
       title: 'MedSync - Walk-in Clinic Management App', 
       desc: 'A multifunctional healthcare app collaborating with engineering students, offering features such as appointment, waitlists, medication management, and clinic navigation.',
       tags: ['Collaboration', 'Mobile UI', 'Healthcare']
     },
     { 
       id: 3, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ3.jpg', 
+      img: publicAsset('Figma/PJ3.jpg'),
       title: 'Mediflect - Medication Tracker & Education', 
       desc: 'A group design project focused on medication schedules and providing detailed pharmaceutical information for patients.',
       tags: ['Group Project', 'HealthTech', 'UX Research']
     },
     { 
       id: 4, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ4.jpg', 
+      img: publicAsset('Figma/PJ4.jpg'),
       title: 'Little Lemon - Restaurant Ordering & Reservation', 
       desc: 'An end-to-end mobile interface design for a dining experience, including table booking, menu browsing, and ordering.',
       tags: ['E-commerce', 'Mobile UI', 'Case Study']
     },
     { 
       id: 5, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ5.jpg', 
+      img: publicAsset('Figma/PJ5.jpg'),
       title: 'VeniceGo - Multi-modal Transit App', 
       desc: 'A transportation app tailored for Venice, integrating waterbus (Vaporetto), taxi services, and urban navigation.',
       tags: ['Transportation', 'Travel UI', 'Location Services']
     },
     { 
       id: 6, 
-      img: '/Tracey-Chen-Portfolio/Figma/PJ6.jpg', 
+      img: publicAsset('Figma/PJ6.jpg'),
       title: 'Zoo - Gamified Fitness Motivation App', 
       desc: 'A collaborative project designing a gamified fitness app to encourage beginners to start their workout journey through social engagement.',
       tags: ['Group Project', 'Gamification', 'Fitness UI']
@@ -52,14 +53,70 @@ const Figma: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 pb-24">
       <header className="py-20 text-center">
-        <span className="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-4 block">UX & UI Design</span>
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">Figma Project</h1>
+        <span className="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-4 block">User Experience</span>
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">UX/UI Design</h1>
         <p className="text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed font-light">
           This portfolio highlights my expertise in UX/UI design, along with my past experiences. I aim to deliver superior digital experiences for users through user research, iterative prototyping, and high-fidelity solutions.
         </p>
       </header>
 
-      <div className="space-y-32">
+      <section className="mb-32">
+        <div className="mb-10">
+          <span className="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-3 block">Professional Work</span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1d1d1f]">Shopify Website Redesign</h2>
+        </div>
+        <div className="grid grid-cols-1 overflow-hidden rounded-[2.5rem] bg-[#1d1d1f] shadow-xl md:grid-cols-12">
+          <div className="p-10 md:col-span-5 md:p-14">
+            <p className="max-w-2xl text-lg leading-relaxed text-white/70 font-light">
+              During my previous co-op, I led a complete redesign of the brand’s official Shopify website, rebuilding the user interface, page layouts, and product pages.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {['SHOPIFY', 'UI/UX', 'LIQUID', 'CODEX'].map((tag) => (
+                <span key={tag} className="rounded-full border border-white/20 px-3 py-1.5 text-[10px] font-bold tracking-widest text-white/80">{tag}</span>
+              ))}
+            </div>
+            <a
+              href="https://comfymoda.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#1d1d1f] transition-transform duration-300 hover:scale-105"
+            >
+              View Live Website <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <a
+            href="https://comfymoda.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit the Comfy Moda website"
+            className="group relative min-h-72 overflow-hidden bg-gray-800 md:col-span-7 md:min-h-full"
+          >
+            <img
+              src="https://comfymoda.com/cdn/shop/files/222.jpg?v=1785166731&width=1200"
+              alt="Comfy Moda website homepage preview"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute left-6 right-6 top-6 flex items-center gap-3 rounded-full bg-white/90 px-4 py-3 text-xs font-medium text-[#1d1d1f] shadow-lg backdrop-blur-md md:left-8 md:right-8 md:top-8">
+              <span className="h-2 w-2 rounded-full bg-blue-500" />
+              <span className="truncate">comfymoda.com</span>
+              <span className="ml-auto text-base transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true">↗</span>
+            </div>
+            <div className="absolute bottom-8 left-8 right-8">
+              <p className="text-xs font-bold tracking-[0.25em] text-white/80">LIVE WEBSITE</p>
+              <p className="mt-2 text-2xl font-bold tracking-tight text-white">Comfy Moda</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-16">
+          <span className="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-3 block">UX/UI Projects</span>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1d1d1f]">UX/UI Projects</h2>
+        </div>
+        <div className="space-y-32">
         {projects.map((project, index) => (
           <section key={project.id} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 group`}>
             {/* Clickable Image Container */}
@@ -90,7 +147,8 @@ const Figma: React.FC = () => {
             </div>
           </section>
         ))}
-      </div>
+        </div>
+      </section>
 
       {/* Image Lightbox / Modal */}
       {selectedImage && (
